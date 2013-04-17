@@ -251,17 +251,7 @@ u32cconv (c, s)
   size_t sn;
 #endif
 
-#if __STDC_ISO_10646__
   wc = c;
-  if (sizeof (wchar_t) == 4 && c <= 0x7fffffff)
-    n = wctomb (s, wc);
-  else if (sizeof (wchar_t) == 2 && c <= 0x10ffff && u32toutf16 (c, ws))
-    n = wcstombs (s, ws, MB_LEN_MAX);
-  else
-    n = -1;
-  if (n != -1)
-    return n;
-#endif
 
 #if HAVE_NL_LANGINFO
   codeset = nl_langinfo (CODESET);
